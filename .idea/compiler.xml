@@ -8,6 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="test-cloud-authorization-server" />
+        <module name="test-cloud-gateway" />
+        <module name="test-cloud-common" />
+        <module name="test-cloud-clienta" />
+        <module name="test-cloud-resource-server" />
+        <module name="test-cloud-clientb" />
       </profile>
     </annotationProcessing>
   </component>

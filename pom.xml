@@ -38,6 +38,11 @@
     <modules>
 
         <module>test-cloud-authorization-server</module>
+        <module>test-cloud-gateway</module>
+        <module>test-cloud-resource-server</module>
+        <module>test-cloud-clienta</module>
+        <module>test-cloud-clientb</module>
+        <module>test-cloud-common</module>
     </modules>
     <dependencyManagement>
         <dependencies>
