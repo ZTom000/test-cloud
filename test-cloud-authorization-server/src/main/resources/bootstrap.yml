@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: winfield-cloud-authorization-server
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.70.16:8848
+        namaspaces: DEFAULT_GROUP
+        file-extension: yml
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
