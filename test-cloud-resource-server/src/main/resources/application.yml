@@ -6,7 +6,7 @@ server:
         domain: flow.com
 spring:
   application:
-    name: test-cloud-authorization-server
+    name: test-cloud-resource-server
   cloud:
     nacos:
       discovery:
