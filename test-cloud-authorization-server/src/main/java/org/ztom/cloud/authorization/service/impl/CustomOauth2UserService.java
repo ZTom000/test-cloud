@@ -23,7 +23,6 @@ import org.ztom.cloud.authorization.authorization.wechat.WechatUserRequestEntity
 import org.ztom.cloud.authorization.authorization.wechat.WechatUserResponseConverter;
 import org.ztom.cloud.authorization.exception.InvalidCaptchaException;
 import org.ztom.cloud.authorization.model.security.BasicOAuth2User;
-import org.ztom.cloud.authorization.service.IOauth2ThirdAccountService;
 import org.ztom.cloud.authorization.strategy.context.Oauth2UserConverterContext;
 
 import java.util.List;
@@ -36,12 +35,10 @@ import java.util.List;
 @Service
 public class CustomOauth2UserService extends DefaultOAuth2UserService {
 
-    private final IOauth2ThirdAccountService thirdAccountService;
 
     private final Oauth2UserConverterContext userConverterContext;
 
-    public CustomOauth2UserService(IOauth2ThirdAccountService thirdAccountService, Oauth2UserConverterContext userConverterContext) {
-        this.thirdAccountService = thirdAccountService;
+    public CustomOauth2UserService( Oauth2UserConverterContext userConverterContext) {
         this.userConverterContext = userConverterContext;
         // 初始化时添加微信用户信息请求处理，oidcUserService本质上是调用该类获取用户信息的，不用添加
         super.setRequestEntityConverter(new WechatUserRequestEntityConverter());
@@ -69,8 +66,6 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
             // 转为项目中的三方用户信息
             BasicOAuth2User basicOauth2User = userConverterContext.convert(userRequest, oAuth2User);
 
-            // 检查用户信息
-            thirdAccountService.checkAndSaveUser(basicOauth2User);
 
             return basicOauth2User;
         } catch (Exception e) {

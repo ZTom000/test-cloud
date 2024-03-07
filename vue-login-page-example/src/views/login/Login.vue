@@ -54,7 +54,7 @@ const submitLogin = (type: string) => {
   loginSubmit(loginModel.value)
     .then((result: any) => {
       if (result.success) {
-        // message.info(`登录成功`)
+        message.info(`登录成功`)
         let target = getQueryString('target')
         if (target) {
           window.location.href = target

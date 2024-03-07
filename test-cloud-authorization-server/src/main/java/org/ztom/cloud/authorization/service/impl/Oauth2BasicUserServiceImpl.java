@@ -47,7 +47,7 @@ public class Oauth2BasicUserServiceImpl extends ServiceImpl<Oauth2BasicUserMappe
 
     private final SysAuthorityMapper sysAuthorityMapper;
 
-    private final Oauth2ThirdAccountMapper thirdAccountMapper;
+//    private final Oauth2ThirdAccountMapper thirdAccountMapper;
 
     private final SysRoleAuthorityMapper sysRoleAuthorityMapper;
 
@@ -125,16 +125,16 @@ public class Oauth2BasicUserServiceImpl extends ServiceImpl<Oauth2BasicUserMappe
 
         // 如果登录类型不为空则代表是三方登录，获取三方用户信息
         if (!ObjectUtils.isEmpty(loginType)) {
-            // 根据三方登录类型与三方用户的唯一Id查询用户信息
-            LambdaQueryWrapper<Oauth2ThirdAccount> wrapper = Wrappers.lambdaQuery(Oauth2ThirdAccount.class)
-                    .eq(Oauth2ThirdAccount::getUniqueId, uniqueId)
-                    .eq(Oauth2ThirdAccount::getType, loginType);
-            Oauth2ThirdAccount oauth2ThirdAccount = thirdAccountMapper.selectOne(wrapper);
-            if (oauth2ThirdAccount != null) {
-                basicUserId = oauth2ThirdAccount.getUserId();
-                // 复制三方用户信息
-                BeanUtils.copyProperties(oauth2ThirdAccount, result);
-            }
+//            // 根据三方登录类型与三方用户的唯一Id查询用户信息
+//            LambdaQueryWrapper<Oauth2ThirdAccount> wrapper = Wrappers.lambdaQuery(Oauth2ThirdAccount.class)
+//                    .eq(Oauth2ThirdAccount::getUniqueId, uniqueId)
+//                    .eq(Oauth2ThirdAccount::getType, loginType);
+//            Oauth2ThirdAccount oauth2ThirdAccount = thirdAccountMapper.selectOne(wrapper);
+//            if (oauth2ThirdAccount != null) {
+//                basicUserId = oauth2ThirdAccount.getUserId();
+//                // 复制三方用户信息
+//                BeanUtils.copyProperties(oauth2ThirdAccount, result);
+//            }
         } else {
             // 为空则代表是使用当前框架提供的登录接口登录的，转为基础用户信息
             basicUserId = Integer.parseInt(uniqueId);

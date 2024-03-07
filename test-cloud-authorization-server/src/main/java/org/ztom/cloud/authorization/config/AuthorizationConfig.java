@@ -30,8 +30,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.CorsFilter;
 import org.ztom.cloud.authorization.authorization.federation.FederatedIdentityIdTokenCustomizer;
-import org.ztom.cloud.authorization.authorization.sms.SmsCaptchaGrantAuthenticationConverter;
-import org.ztom.cloud.authorization.authorization.sms.SmsCaptchaGrantAuthenticationProvider;
+//import org.ztom.cloud.authorization.authorization.sms.SmsCaptchaGrantAuthenticationConverter;
+//import org.ztom.cloud.authorization.authorization.sms.SmsCaptchaGrantAuthenticationProvider;
 import org.ztom.cloud.authorization.constant.RedisConstants;
 import org.ztom.cloud.authorization.constant.SecurityConstants;
 import org.ztom.cloud.authorization.property.CustomSecurityProperties;
@@ -76,15 +76,15 @@ public class AuthorizationConfig {
         // 添加基础的认证配置
         SecurityUtils.applyBasicSecurity(http, corsFilter, customSecurityProperties);
 
-        // 自定义短信认证登录转换器
-        SmsCaptchaGrantAuthenticationConverter converter = new SmsCaptchaGrantAuthenticationConverter();
-        // 自定义短信认证登录认证提供
-        SmsCaptchaGrantAuthenticationProvider provider = new SmsCaptchaGrantAuthenticationProvider();
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                // 添加自定义grant_type——短信认证登录
-                .tokenEndpoint(tokenEndpoint -> tokenEndpoint
-                        .accessTokenRequestConverter(converter)
-                        .authenticationProvider(provider));
+//        // 自定义短信认证登录转换器
+//        SmsCaptchaGrantAuthenticationConverter converter = new SmsCaptchaGrantAuthenticationConverter();
+//        // 自定义短信认证登录认证提供
+//        SmsCaptchaGrantAuthenticationProvider provider = new SmsCaptchaGrantAuthenticationProvider();
+//        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+//                // 添加自定义grant_type——短信认证登录
+//                .tokenEndpoint(tokenEndpoint -> tokenEndpoint
+//                        .accessTokenRequestConverter(converter)
+//                        .authenticationProvider(provider));
 
         DefaultSecurityFilterChain build = http.build();
 
@@ -96,9 +96,9 @@ public class AuthorizationConfig {
         // 如果获取不到则初始化一个实例放入SharedObject中，所以要在build方法调用之后获取
         // 在通过set方法设置进provider中，但是如果在build方法之后调用authenticationProvider(provider)
         // 框架会提示unsupported_grant_type，因为已经初始化完了，在添加就不会生效了
-        provider.setTokenGenerator(tokenGenerator);
-        provider.setAuthorizationService(authorizationService);
-        provider.setAuthenticationManager(authenticationManager);
+//        provider.setTokenGenerator(tokenGenerator);
+//        provider.setAuthorizationService(authorizationService);
+//        provider.setAuthenticationManager(authenticationManager);
 
         return build;
     }
