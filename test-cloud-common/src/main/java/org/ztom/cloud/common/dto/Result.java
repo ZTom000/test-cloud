@@ -1,8 +1,7 @@
 package org.ztom.cloud.common.dto;
 
-
-import com.winfield.cloud.common.constent.ErrorCode;
-import com.winfield.cloud.common.constent.ErrorMsg;
+import org.ztom.cloud.common.constent.ErrorCode;
+import org.ztom.cloud.common.constent.ErrorMsg;
 
 /**
  * @Description TODO
