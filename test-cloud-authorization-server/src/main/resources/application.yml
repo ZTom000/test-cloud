@@ -5,6 +5,14 @@ server:
       cookie:
         domain: flow.com
 spring:
+  application:
+    name: test-cloud-authorization-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        group: test-cloud
+        namespace:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/auth-example?serverTimezone=Asia/Shanghai&userUnicode=true&characterEncoding=utf-8&ssl-mode=REQUIRED
@@ -90,7 +98,6 @@ mybatis-plus:
   # 扫描mapper文件
   mapper-locations:
     - classpath:mapper/*.xml
-   # - classpath:org/ztom/cloud/authorization/mapper/xml/*Mapper.xml
 custom:
   # 自定义认证配置
   security:
