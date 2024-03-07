@@ -76,9 +76,6 @@ public class AuthorizationConfig {
         // 添加基础的认证配置
         SecurityUtils.applyBasicSecurity(http, corsFilter, customSecurityProperties);
 
-        // 设置设备码配置
-        SecurityUtils.applyDeviceSecurity(http, customSecurityProperties, registeredClientRepository, authorizationServerSettings);
-
         // 自定义短信认证登录转换器
         SmsCaptchaGrantAuthenticationConverter converter = new SmsCaptchaGrantAuthenticationConverter();
         // 自定义短信认证登录认证提供

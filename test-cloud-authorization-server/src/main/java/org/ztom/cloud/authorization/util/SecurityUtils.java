@@ -28,8 +28,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.CorsFilter;
-import org.ztom.cloud.authorization.authorization.device.DeviceClientAuthenticationConverter;
-import org.ztom.cloud.authorization.authorization.device.DeviceClientAuthenticationProvider;
 import org.ztom.cloud.authorization.authorization.handler.ConsentAuthenticationFailureHandler;
 import org.ztom.cloud.authorization.authorization.handler.ConsentAuthorizationResponseHandler;
 import org.ztom.cloud.authorization.authorization.handler.DeviceAuthorizationResponseHandler;
@@ -243,68 +241,6 @@ public class SecurityUtils {
                         .jwt(Customizer.withDefaults())
                         .accessDeniedHandler(SecurityUtils::exceptionHandler)
                         .authenticationEntryPoint(SecurityUtils::exceptionHandler));
-	}
-
-	/**
-     * 添加设备码相关自定义配置
-     * 设备码的授权确认页面、验证页面、自定义响应处理等
-     *
-     * @param http                        核心配置类
-     * @param registeredClientRepository  客户端Repository
-     * @param authorizationServerSettings 认证服务配置类
-     */
-    public static void applyDeviceSecurity(HttpSecurity http,
-										   CustomSecurityProperties customSecurityProperties,
-										   RegisteredClientRepository registeredClientRepository,
-										   AuthorizationServerSettings authorizationServerSettings) {
-		// 新建设备码converter和provider
-		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
-                new DeviceClientAuthenticationConverter(
-						authorizationServerSettings.getDeviceAuthorizationEndpoint());
-		DeviceClientAuthenticationProvider deviceClientAuthenticationProvider =
-                new DeviceClientAuthenticationProvider(registeredClientRepository);
-
-		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                // 设置自定义用户确认授权页
-                .authorizationEndpoint(authorizationEndpoint -> {
-					// 校验授权确认页面是否为完整路径；是否是前后端分离的页面
-					boolean absoluteUrl = UrlUtils.isAbsoluteUrl(customSecurityProperties.getConsentPageUri());
-					// 如果是分离页面则重定向，否则转发请求
-					authorizationEndpoint.consentPage(absoluteUrl ? CUSTOM_CONSENT_REDIRECT_URI : customSecurityProperties.getConsentPageUri());
-					if (absoluteUrl) {
-						// 适配前后端分离的授权确认页面，成功/失败响应json
-						authorizationEndpoint.errorResponseHandler(new ConsentAuthenticationFailureHandler(customSecurityProperties.getConsentPageUri()));
-						authorizationEndpoint.authorizationResponseHandler(new ConsentAuthorizationResponseHandler(customSecurityProperties.getConsentPageUri()));
-					}
-				}
-		)
-                // 设置设备码用户验证url(自定义用户验证页)
-                .deviceAuthorizationEndpoint(deviceAuthorizationEndpoint ->
-                        deviceAuthorizationEndpoint.verificationUri(UrlUtils.isAbsoluteUrl(customSecurityProperties.getDeviceActivatedUri()) ? CUSTOM_DEVICE_REDIRECT_URI : customSecurityProperties.getDeviceActivateUri())
-		)
-                // 设置验证设备码用户确认页面
-                .deviceVerificationEndpoint(deviceVerificationEndpoint -> {
-					// 校验授权确认页面是否为完整路径；是否是前后端分离的页面
-					boolean absoluteUrl = UrlUtils.isAbsoluteUrl(customSecurityProperties.getConsentPageUri());
-					// 如果是分离页面则重定向，否则转发请求
-					deviceVerificationEndpoint.consentPage(absoluteUrl ? CUSTOM_CONSENT_REDIRECT_URI : customSecurityProperties.getConsentPageUri());
-					if (absoluteUrl) {
-						// 适配前后端分离的授权确认页面，失败响应json
-						deviceVerificationEndpoint.errorResponseHandler(new ConsentAuthenticationFailureHandler(customSecurityProperties.getConsentPageUri()));
-					}
-					// 如果授权码验证页面或者授权确认页面是前后端分离的
-					if (UrlUtils.isAbsoluteUrl(customSecurityProperties.getDeviceActivateUri()) || absoluteUrl) {
-						// 添加响应json处理
-						deviceVerificationEndpoint.deviceVerificationResponseHandler(new DeviceAuthorizationResponseHandler(customSecurityProperties.getDeviceActivatedUri()));
-					}
-				}
-		)
-                .clientAuthentication(clientAuthentication ->
-                        // 客户端认证添加设备码的converter和provider
-                        clientAuthentication
-                                .authenticationConverter(deviceClientAuthenticationConverter)
-                                .authenticationProvider(deviceClientAuthenticationProvider)
-		);
 	}
 
 }
