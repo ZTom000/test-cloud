@@ -5,7 +5,10 @@ spring:
     name: test-cloud-clienta
   cloud:
     nacos:
-      serverAddr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+        group: test-cloud
+        namespace: a91cf009-9642-4c46-bc20-202aebc94f4d
   security:
     oauth2:
       # 资源服务器配置

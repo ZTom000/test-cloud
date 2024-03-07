@@ -47,6 +47,11 @@ spring:
               - profile
 
   cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        group: test-cloud
+        namespace: a91cf009-9642-4c46-bc20-202aebc94f4d
     gateway:
       default-filters:
         # 令牌中继
