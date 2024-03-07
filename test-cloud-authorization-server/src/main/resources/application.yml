@@ -113,3 +113,6 @@ custom:
     ignore-uri-list: assets/**, /webjars/**, /login, /getCaptcha, /getSmsCaptcha, /error, /oauth2/consent/parameters, /test03, /favicon.ico
     # 当前认证服务访问的路径
     issuer-url: http://auth.flow.com
+logging:
+  level:
+    com: debug

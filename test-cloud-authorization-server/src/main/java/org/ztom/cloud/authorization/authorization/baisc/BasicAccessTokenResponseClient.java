@@ -10,8 +10,8 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenRespon
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.ztom.cloud.authorization.authorization.wechat.WechatCodeGrantRequestEntityConverter;
-import org.ztom.cloud.authorization.authorization.wechat.WechatMapAccessTokenResponseConverter;
+//import org.ztom.cloud.authorization.authorization.wechat.WechatCodeGrantRequestEntityConverter;
+//import org.ztom.cloud.authorization.authorization.wechat.WechatMapAccessTokenResponseConverter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,13 +35,13 @@ public class BasicAccessTokenResponseClient implements OAuth2AccessTokenResponse
      *  默认添加“text/plain”类型的格式
      */
     public BasicAccessTokenResponseClient() {
-        tokenResponseClient.setRequestEntityConverter(new WechatCodeGrantRequestEntityConverter());
+//        tokenResponseClient.setRequestEntityConverter(new WechatCodeGrantRequestEntityConverter());
         // 自定义 RestTemplate，适配微信登录获取token
         OAuth2AccessTokenResponseHttpMessageConverter messageConverter = new OAuth2AccessTokenResponseHttpMessageConverter();
         List<MediaType> mediaTypes = new ArrayList<>(messageConverter.getSupportedMediaTypes());
         // 微信获取token时响应的类型为“text/plain”，这里特殊处理一下
         mediaTypes.add(MediaType.TEXT_PLAIN);
-        messageConverter.setAccessTokenResponseConverter(new WechatMapAccessTokenResponseConverter());
+//        messageConverter.setAccessTokenResponseConverter(new WechatMapAccessTokenResponseConverter());
         messageConverter.setSupportedMediaTypes(mediaTypes);
 
         // 初始化RestTemplate

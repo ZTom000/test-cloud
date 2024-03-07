@@ -19,8 +19,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.ztom.cloud.authorization.authorization.wechat.WechatUserRequestEntityConverter;
-import org.ztom.cloud.authorization.authorization.wechat.WechatUserResponseConverter;
+//import org.ztom.cloud.authorization.authorization.wechat.WechatUserRequestEntityConverter;
+//import org.ztom.cloud.authorization.authorization.wechat.WechatUserResponseConverter;
 import org.ztom.cloud.authorization.exception.InvalidCaptchaException;
 import org.ztom.cloud.authorization.model.security.BasicOAuth2User;
 import org.ztom.cloud.authorization.strategy.context.Oauth2UserConverterContext;
@@ -41,14 +41,14 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
     public CustomOauth2UserService( Oauth2UserConverterContext userConverterContext) {
         this.userConverterContext = userConverterContext;
         // 初始化时添加微信用户信息请求处理，oidcUserService本质上是调用该类获取用户信息的，不用添加
-        super.setRequestEntityConverter(new WechatUserRequestEntityConverter());
+//        super.setRequestEntityConverter(new WechatUserRequestEntityConverter());
         // 设置用户信息转换器
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
         List<HttpMessageConverter<?>> messageConverters = List.of(
                 new StringHttpMessageConverter(),
                 // 获取微信用户信息时使其支持“text/plain”
-                new WechatUserResponseConverter(),
+//                new WechatUserResponseConverter(),
                 new ResourceHttpMessageConverter(),
                 new ByteArrayHttpMessageConverter(),
                 new AllEncompassingFormHttpMessageConverter()

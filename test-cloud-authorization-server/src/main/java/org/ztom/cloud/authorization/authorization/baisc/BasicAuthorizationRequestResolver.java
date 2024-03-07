@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequest
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.stereotype.Component;
-import org.ztom.cloud.authorization.authorization.wechat.WechatAuthorizationRequestConsumer;
+//import org.ztom.cloud.authorization.authorization.wechat.WechatAuthorizationRequestConsumer;
 
 /**
  * 基础授权请求处理类，目前只做了微信登录授权请求的适配
@@ -23,7 +23,7 @@ public class BasicAuthorizationRequestResolver implements OAuth2AuthorizationReq
         // DI通过构造器自动注入clientRegistrationRepository，实例化DefaultOAuth2AuthorizationRequestResolver处理
         this.authorizationRequestResolver = new DefaultOAuth2AuthorizationRequestResolver(clientRegistrationRepository, OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI);
         // 兼容微信登录授权申请
-        this.authorizationRequestResolver.setAuthorizationRequestCustomizer(new WechatAuthorizationRequestConsumer());
+//        this.authorizationRequestResolver.setAuthorizationRequestCustomizer(new WechatAuthorizationRequestConsumer());
     }
 
     @Override
