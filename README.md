@@ -8,3 +8,5 @@
 | 4040 | test-cloud-gateway |
 | 4041 | test-cloud-authorization-server |
 | 4042 | test-cloud-resource-server |
+| 4043 | test-cloud-clienta |
+| 4044 | test-cloud-clientb |
