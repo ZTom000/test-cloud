@@ -18,6 +18,7 @@ if (code) {
   const state = localStorage.getItem('state')
   // 校验state，防止cors
   const urlState = getQueryString('state')
+  console.log("urlState: " + urlState + " state: " + state + ' code: ' + code)
   if (urlState !== state) {
     message.warning('state校验失败.')
   } else {
