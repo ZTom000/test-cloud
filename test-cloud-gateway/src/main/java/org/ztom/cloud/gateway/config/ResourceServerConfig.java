@@ -1,5 +1,7 @@
 package org.ztom.cloud.gateway.config;
 
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -7,12 +9,14 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.ztom.cloud.gateway.filter.TestWebFilter;
 import reactor.core.publisher.Mono;
 
 /**
@@ -24,6 +28,9 @@ import reactor.core.publisher.Mono;
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class ResourceServerConfig {
+
+    @Autowired
+    private TestWebFilter testWebFilter;
 
     /**
      * 配置认证相关的过滤器链
@@ -62,7 +69,7 @@ public class ResourceServerConfig {
                 .authenticationFailureHandler(this::failureHandler)
                 */
         );
-
+        http.addFilterAt(testWebFilter, SecurityWebFiltersOrder.LAST);
         return http.build();
     }
 
