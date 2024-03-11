@@ -69,7 +69,7 @@ public class ResourceServerConfig {
                 .authenticationFailureHandler(this::failureHandler)
                 */
         );
-        http.addFilterAt(testWebFilter, SecurityWebFiltersOrder.LAST);
+//        http.addFilterAt(testWebFilter, SecurityWebFiltersOrder.LAST);
         return http.build();
     }
 
@@ -89,5 +89,6 @@ public class ResourceServerConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
     }
+
 
 }
