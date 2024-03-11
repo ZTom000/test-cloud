@@ -69,3 +69,11 @@ spring:
           uri: lb://test-cloud-clientb
           predicates:
             - Path=/clientb/**
+        - id: test-cloud-seata-clienta
+          uri: lb://test-cloud-seata-clienta
+          predicates:
+            - Path=/seataa/**
+        - id: test-cloud-seata-clientb
+          uri: lb://test-cloud-seata-clientb
+          predicates:
+            - Path=/seatab/**

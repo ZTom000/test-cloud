@@ -2,6 +2,7 @@ package org.ztom.cloud.seata.clienta.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,4 +31,9 @@ public class TestController {
         return "app";
     }
 
+    @PostMapping("/test/tcc")
+    @PreAuthorize("hasAnyAuthority('message.write')")
+    public String testTcc() {
+        return "";
+    }
 }
