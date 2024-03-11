@@ -9,10 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="test-cloud-authorization-server" />
         <module name="test-cloud-gateway" />
-        <module name="test-cloud-common" />
         <module name="test-cloud-clienta" />
         <module name="test-cloud-resource-server" />
         <module name="test-cloud-clientb" />
+        <module name="test-cloud-steata-clientb" />
+        <module name="test-cloud-common" />
+        <module name="test-cloud-steata-clienta" />
       </profile>
     </annotationProcessing>
   </component>
