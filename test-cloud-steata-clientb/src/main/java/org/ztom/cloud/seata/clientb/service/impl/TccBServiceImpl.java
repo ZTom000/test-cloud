@@ -1,7 +1,9 @@
 package org.ztom.cloud.seata.clientb.service.impl;
 
 import io.seata.rm.tcc.api.BusinessActionContext;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.ztom.cloud.seata.clientb.dao.StorageMapper;
 import org.ztom.cloud.seata.clientb.service.TccBService;
 
 /**
@@ -12,9 +14,21 @@ import org.ztom.cloud.seata.clientb.service.TccBService;
  */
 @Service
 public class TccBServiceImpl implements TccBService {
+
+    @Resource
+    private StorageMapper storageMapper;
+
+    /**
+     * @Description TODO try 处理业务
+     * @Params [actionContext, xid, a]
+     * @Return boolean
+     * @Author 翟涛
+     * @Date 2024/3/12 8:33
+     */
     @Override
     public boolean preare(BusinessActionContext actionContext, String xid, String a) {
-        return false;
+        boolean flag = false;
+        return flag;
     }
 
     @Override

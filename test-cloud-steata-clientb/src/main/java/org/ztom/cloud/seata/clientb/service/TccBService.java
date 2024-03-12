@@ -11,12 +11,5 @@ import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
  * @Date 2024/3/11 14:17
  */
 public interface TccBService {
-    @TwoPhaseBusinessAction(name = "TccBService", commitMethod = "commit", rollbackMethod = "rollback")
-    public boolean preare(BusinessActionContext actionContext,
-                          @BusinessActionContextParameter(paramName = "xid") String xid,
-                          @BusinessActionContextParameter(paramName = "a") String a);
 
-    public boolean commit(BusinessActionContext actionContext);
-
-    public boolean rollback(BusinessActionContext actionContext);
 }

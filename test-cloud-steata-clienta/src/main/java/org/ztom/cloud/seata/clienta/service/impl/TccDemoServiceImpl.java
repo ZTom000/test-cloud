@@ -2,8 +2,11 @@ package org.ztom.cloud.seata.clienta.service.impl;
 
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
+import org.ztom.cloud.seata.clienta.service.TccAService;
 import org.ztom.cloud.seata.clienta.service.TccDemoService;
+import org.ztom.cloud.seata.clienta.service.feign.TccBServiceFeign;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -14,6 +17,11 @@ import java.util.Map;
  */
 @Service
 public class TccDemoServiceImpl implements TccDemoService {
+
+    @Resource
+    private TccAService aService;
+    @Resource
+    private TccBServiceFeign bFeignService;
 
     @Override
     @GlobalTransactional
