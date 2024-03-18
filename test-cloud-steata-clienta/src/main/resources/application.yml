@@ -1,5 +1,3 @@
-server:
-  port: 4043
 spring:
   application:
     name: test-cloud-seata-clienta
@@ -9,6 +7,11 @@ spring:
         server-addr: 127.0.0.1:8848
         group: test-cloud
         namespace: a91cf009-9642-4c46-bc20-202aebc94f4d
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/seata?serverTimezone=Asia/Shanghai&userUnicode=true&characterEncoding=utf-8&ssl-mode=REQUIRED
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:Qwer0258}
   security:
     oauth2:
       # 资源服务器配置

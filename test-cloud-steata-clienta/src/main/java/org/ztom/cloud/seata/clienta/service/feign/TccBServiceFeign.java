@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
  * @Date 2024/3/12 8:12
  */
 @Service
-@FeignClient()
+//@FeignClient("test-cloud-seata-clientb")
 public interface TccBServiceFeign {
 }
